@@ -1,0 +1,368 @@
+body {
+    cursor: url('/images/cursor2.cur') 16 16, url('/images/cursor2.png'), auto; /* this changes cursor */
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: rgb(0, 0, 0);
+  }
+  
+
+  
+  img {
+    position: fixed;
+    top: 50%;
+    left: 50%; /* Center the images horizontally */
+    transform: translate(-50%, -50%);
+    cursor: url('/images/cursor2.cur') 16 16, url('/images/cursor2.png'), auto;
+}
+  
+  .mirror {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    z-index: 400; /* Optional: adjust z-index if needed */
+  }
+  
+  .caffeine, .nervous-system, .brainwashing, .propaganda {
+    width: 500px;
+    height: auto;
+  }
+  
+  #myVidPlayer {
+    cursor: url('/images/mirror/cursorBarbie.png') 16 16, auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleX(-1);
+    width: auto;
+    height: 29%;
+    z-index: 500; /* Lower than sparkles */
+    pointer-events: none;
+    border-radius: 50%;
+    filter: brightness(1.2) blur(1px) contrast(1.2) hue-rotate(330deg);
+  }
+  
+  #captureButton {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: rgba(255, 0, 150, 0.7); /* Pinkish color with some transparency */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1500; /* Ensure it appears above other elements */
+  }
+  
+  .frame {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 36.5%;
+    width: auto;
+    z-index: 490;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px rgb(255, 255, 255);
+    animation: pulseGlow 1.6s infinite;
+  }
+  
+  /* Define the pulsing effect */
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 30px 10px hsl(324, 100%, 70%);
+    }
+    50% {
+      box-shadow: 0 0 30px 15px rgb(223, 255, 120);
+    }
+  }
+  
+  /* Split container to hold left and right images */
+  .split-container {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Half-image container for both left and right */
+  .image-half {
+    width: 50%;
+    height: 100%; /* Full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Left image without transform */
+  .left-half img {
+    width: 100%; /* Image fills the left half */
+    object-fit: cover; /* Ensure the image fits the left side without distortion */
+  }
+  
+  /* Right image with horizontal mirror transform */
+  .right-half img {
+    width: 100%; /* Image fills the right half */
+    object-fit: cover;
+    transform: scaleX(-1); /* Mirror the image horizontally */
+  }
+  
+  /* Additional styles for main image */
+  #capturedImage {
+    display: none; /* Hide the original image, as we are using the split effect */
+  }
+  
+  .sparkleGif {
+    position: fixed;
+    width: 47%;
+    transform: rotate(-73deg);
+    height: auto;
+    left: 2%;
+    top: 100px;
+    z-index: 450;
+    mix-blend-mode: screen;
+  }
+
+  .sparkleGifFlipped {
+    position: fixed;
+    width: 47%;
+    height: auto;
+    left: 51%;
+    top: 100px;
+    z-index: 450;
+    mix-blend-mode: screen;
+    transform: rotate(73deg) scaleX(-1); /* Flip horizontally */
+  }
+
+  .sun {
+    overflow: hidden;
+    width: 30%;
+    height: auto;
+    position: absolute; /* Centering with absolute positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg); /* Center and start rotation */
+    transform-origin: center; /* Rotate around the center of the element */
+    animation: rotateSun 5s linear infinite, pulseSun 4s ease-in-out infinite; /* Adding pulse animation */
+}
+
+/* Rotation animation */
+@keyframes rotateSun {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg); /* Start at 0 degrees */
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg); /* End at 360 degrees */
+    }
+}
+
+/* Pulse animation for the sun */
+@keyframes pulseSun {
+    0% {
+        transform: translate(-50%, -50%) scale(1); /* Normal size */
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1); /* Slightly larger */
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1); /* Back to normal size */
+    }
+}
+
+
+  @keyframes float {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(10px, -10px); /* Slight upward and right movement */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  @keyframes floatReverse {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-10px, 10px); /* Slight downward and left movement */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+
+  
+  /* Applying animations with different delays to make each planet unique */
+.bluePlanet {
+  overflow: hidden;
+  width: 17%;
+  height: auto;
+  top: 65%;
+  left: 12%;
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
+}
+
+.rainbowPlanet {
+  overflow: hidden;
+  width: 25%;
+  height: auto;
+  top: 20%;
+  left: 2%;
+  position: absolute;
+  animation: floatReverse 7s ease-in-out infinite;
+}
+
+.greenPlanet {
+  overflow: hidden;
+  width: 22%;
+  height: auto;
+  top: 6%;
+  left: 65%;
+  position: absolute;
+  animation: float 5s ease-in-out infinite;
+}
+
+.mars {
+  overflow: hidden;
+  width: 12%;
+  height: auto;
+  top: 5%;
+  left: 25%;
+  position: absolute;
+  animation: floatReverse 8s ease-in-out infinite;
+}
+
+.pinkYellow {
+  overflow: hidden;
+  width: 12%;
+  height: auto;
+  top: 40%;
+  left: 85%;
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
+}
+
+.saturn {
+  overflow: hidden;
+  width: 27%;
+  height: auto;
+  top: 62%;
+  left: 65%;
+  position: absolute;
+  animation: floatReverse 9s ease-in-out infinite;
+}
+
+.raysOverlay {
+  width: 30%;
+  height: auto;
+  top: 40%;
+  left: 20%;
+  mix-blend-mode: screen;
+}
+
+.dark {
+  width: 20%;
+  height: auto;
+  top: 15%;
+  z-index: 1500;
+}
+
+.sky {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute; 
+}
+
+#clouds, #clouds2 {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 50%;
+  animation: moveClouds s linear infinite;
+}
+
+#clouds {
+  left: 0%;
+  top: 3%; /* Position the first cloud layer */
+  animation: moveClouds 15s linear infinite; /* Move from left to right */
+  z-index: 400;
+}
+
+#clouds2 {
+  left: 90;
+  top: 50%; /* Position the second cloud layer lower */
+  width: 60%; /* Slightly different size for variety */
+  animation: moveCloudsReverse 20s linear infinite; /* Move from right to left */
+  z-index: 1500;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+@keyframes moveClouds {
+  0% {
+    transform: translateX(-100%); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(250%); /* End off-screen to the right */
+  }
+}
+
+@keyframes moveCloudsReverse {
+  0% {
+    transform: translateX(100%); /* Start off-screen to the right */
+  }
+  100% {
+    transform: translateX(-250%); /* End off-screen to the left */
+  }
+}
+
+.passingText {
+  position: absolute;
+  width: 50%;
+  left: 47%;
+  top: 55%;
+  z-index: 1000;
+  animation: bounce 5s linear infinite; /* Adjust duration for speed */
+  mix-blend-mode:luminosity;
+}
+
+.cloudsBg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 90%;
+  
+}
+
+.rays {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+
+.hh {
+
+overflow: hidden;
+  position: fixed;
+  width: 76%;
+  height: 58%;
+  z-index: 1500;
+  mix-blend-mode:darken;
+  opacity: 90%;
+}

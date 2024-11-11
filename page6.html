@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Eternal rest</title>
+        <link rel="stylesheet" href="style.css">
+
+        <style>
+            body {
+                background-color: white; /* Use quotes around the URL */
+                z-index: 450;
+                background-size: cover;
+            }
+
+            .jesusframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 450;
+  object-fit:  cover;
+}
+
+
+#myVidPlayer2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  z-index: 400; /* Lower than sparkles */
+  pointer-events: none;
+  filter: brightness(1.3) blur(1px) contrast(2) hue-rotate(300deg); /* No commas between filters */
+  object-fit: cover; /* Ensures content scales to fill area */
+  transform: scaleX(-1); /* Horizontal flip */
+}
+          
+            </style>
+            
+
+    </head>
+
+
+    <body>
+        <a href="index.html">
+            <img class="hh" src="images/mirror/passing/hh.gif" alt="">
+        </a>
+        
+        <img class="jesusframe" src="images/eternal/jesusframe.gif" alt="">
+        
+        <video id="myVidPlayer2" muted autoplay></video>
+
+        <script>
+            const video = document.querySelector('#myVidPlayer2');
+        
+            // Start the video stream
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(err => {
+                    console.error('Webcam error:', err);
+                    alert('Webcam permission required.');
+                });
+        
+            // Delay capture to ensure video dimensions are ready
+            function captureFrame() {
+                // Wait for video to be fully ready before capture
+                setTimeout(() => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+        
+                    if (canvas.width === 0 || canvas.height === 0) {
+                        console.error("Video feed not ready.");
+                        alert("Error: Video feed not ready.");
+                        return;
+                    }
+        
+                    const context = canvas.getContext('2d');
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+                    // Save the captured frame to sessionStorage
+                    const imageDataURL = canvas.toDataURL('image/png');
+                    sessionStorage.setItem('capturedFrame', imageDataURL);
+                    console.log("Captured frame saved to sessionStorage.");  // Debug message
+        
+                    // Navigate to the display page
+                    window.location.href = 'page2.html';
+                }, 500); // Adjust delay as needed
+            }
+        
+        </script>
+        
+
+    </body>
+</html>

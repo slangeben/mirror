@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Captured Image Display</title>
+    <style>
+        body {
+            cursor: url(/images/mirror/goldfish.cur) 16 16, auto;
+            background-image: url(/images/mirror/scenery.gif);
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+       
+        .ripple-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            z-index: 1; /* Behind the main content */
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: -3px; /* Space between rows */
+        }
+
+        img {
+            max-width: 50%;
+            margin-right: -3px;
+           filter: brightness(1.5) blur(1px) contrast(1.2) hue-rotate(330deg);
+           mix-blend-mode: multiply;
+        }
+
+        /* Remove margin from the last image in each row */
+        .image-row img:last-child {
+            margin-right: 0;
+        }
+
+        .reflectionText {
+            position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: auto;
+    z-index: 500; /* Optional: adjust z-index if needed */
+    mix-blend-mode:exclusion;
+        }
+       
+
+        
+    </style>
+</head>
+<body>
+
+
+
+    <!-- Ripple overlay container -->
+    <div class="ripple-overlay"></div>
+
+    <!-- Top row: Original and horizontally flipped images -->
+    <div class="image-row">
+        <!-- Original Image -->
+        <img id="originalImage" src="" alt="Captured Image">
+    
+        <!-- Mirrored Horizontally (X-axis) -->
+        <img id="mirroredImage" src="" alt="Mirrored Image X-axis" style="transform: scaleX(-1);">
+    </div>
+
+    <!-- Bottom row: Vertically and fully flipped images -->
+    <div class="image-row">
+        <!-- Mirrored Vertically (Y-axis) -->
+        <img id="mirroredImageY" src="" alt="Mirrored Image Y-axis" style="transform: scaleY(-1);">
+    
+        <!-- Mirrored Both Axes (X and Y) -->
+        <img id="mirroredImageXY" src="" alt="Mirrored Image X and Y axes" style="transform: scaleX(-1) scaleY(-1);">
+    </div>
+
+     <!-- jQuery and Ripple Effect Libraries -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+ 
+    <script>
+        // Retrieve the captured frame from sessionStorage
+        const capturedFrame = sessionStorage.getItem('capturedFrame');
+
+        // Apply the ripple effect to the overlay
+        $(document).ready(function() {
+            $('.ripple-overlay').ripples({
+                resolution: 512,
+                dropRadius: 20, // size of the ripple
+                perturbance: 0.4, // strength of the ripple effect
+            });
+        });
+
+        // Log the retrieved data to check if it's valid
+        console.log("Retrieved captured frame from sessionStorage:", capturedFrame);
+
+        // Set the `src` attribute for both images if the captured frame is valid
+        if (capturedFrame && capturedFrame.startsWith("data:image/png")) {
+            document.getElementById('originalImage').src = capturedFrame;
+            document.getElementById('mirroredImage').src = capturedFrame;
+            document.getElementById('mirroredImageY').src = capturedFrame;
+            document.getElementById('mirroredImageXY').src = capturedFrame;
+
+            console.log("Images displayed successfully.");
+        } else {
+            console.error("No valid captured frame found in sessionStorage.");
+            alert("No captured frame found.");
+        }
+    </script>
+<a href="page3.html">
+    <img class="reflectionText" src="/images/mirror/reflection.gif" alt="reflection">
+</a>
+</body>
+</html>

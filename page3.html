@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light</title>
+    <style>
+        body {
+            cursor: url(/images/mirror/passing/flashlight.png) 25 25, auto;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        img{
+            position: absolute;
+            top: 50%;
+            left: 53%;
+            transform: translate(-50%, -50%);
+        }
+
+        .lightText {
+            width: 50%;
+            height: auto;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="page4.html">
+        <img class="lightText" src="/images/mirror/planets/light.png" alt="">
+        <!-- Optional Image -->
+        <!-- <img class="nervous-system" src="images/nervous-system.png" alt="Nervous System"> -->
+    </a>
+
+    <script>
+        
+        let zIndexCounter = 1; // Counter for stacking z-index
+
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div'); // Create new cursor element
+            cursor.style.position = 'absolute';
+            cursor.style.top = `${e.pageY - 125}px`; // Adjust so the cursor is centered
+            cursor.style.left = `${e.pageX - 125}px`;
+            cursor.style.backgroundColor = 'rgba(255, 255, 0, 0.556)'; // Semi-transparent yellow
+            cursor.style.width = '250px';
+            cursor.style.height = '250px';
+            cursor.style.borderRadius = '50%'; // Ensure it's circular
+            cursor.style.pointerEvents = 'none'; // Allow mouse events to pass through
+            cursor.style.filter = 'blur(30px)'; // Blur for flashlight effect
+            cursor.style.zIndex = zIndexCounter++; // Increase z-index for stacking effect
+
+            // Add soft edge shadow to make it look smoother
+            cursor.style.boxShadow = '0 0 30px rgba(255, 255, 0, 0.6)';
+
+            document.body.appendChild(cursor); // Append to the body
+
+            // Remove cursor after 0.5 seconds to avoid too many elements stacking forever
+            setTimeout(() => {
+                cursor.remove();
+            }, 500); // Removes cursor element after 500ms
+        });
+
+    </script>
+</body>
+</html>
+
