@@ -1,5 +1,5 @@
 body {
-    cursor: url('/images/cursor2.cur') 16 16, url('/images/cursor2.png'), auto; /* this changes cursor */
+    cursor: url('images/cursor2.cur') 16 16, url('images/cursor2.png'), auto; /* this changes cursor */
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -13,7 +13,7 @@ body {
     top: 50%;
     left: 50%; /* Center the images horizontally */
     transform: translate(-50%, -50%);
-    cursor: url('/images/cursor2.cur') 16 16, url('/images/cursor2.png'), auto;
+    cursor: url('images/cursor2.cur') 16 16, url('images/cursor2.png'), auto;
 }
   
   .mirror {
@@ -26,13 +26,8 @@ body {
     z-index: 400; /* Optional: adjust z-index if needed */
   }
   
-  .caffeine, .nervous-system, .brainwashing, .propaganda {
-    width: 500px;
-    height: auto;
-  }
   
   #myVidPlayer {
-    cursor: url('/images/mirror/cursorBarbie.png') 16 16, auto;
     position: fixed;
     top: 50%;
     left: 50%;
