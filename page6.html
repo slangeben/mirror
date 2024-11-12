@@ -32,7 +32,23 @@
   object-fit: cover; /* Ensures content scales to fill area */
   transform: scaleX(-1); /* Horizontal flip */
 }
-          
+
+/* Loading screen styles */
+#loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 500;
+        }
+
             </style>
             
 
@@ -41,6 +57,8 @@
 
     <body>
         <a href="index.html">
+
+            <div id="loadingScreen">Loading, please wait...</div>
             <img class="hh" src="images/mirror/passing/hh.gif" alt="">
         </a>
         
@@ -50,45 +68,51 @@
 
         <script>
             const video = document.querySelector('#myVidPlayer2');
-        
+            const loadingScreen = document.querySelector('#loadingScreen');
+    
             // Start the video stream
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(stream => {
                     video.srcObject = stream;
                     video.play();
+                    hideLoadingScreen();  // Hide loading screen once video starts playing
                 })
                 .catch(err => {
                     console.error('Webcam error:', err);
                     alert('Webcam permission required.');
+                    hideLoadingScreen();  // Hide loading screen even if there's an error
                 });
-        
+    
+            // Function to hide the loading screen
+            function hideLoadingScreen() {
+                loadingScreen.style.display = 'none';
+            }
+    
             // Delay capture to ensure video dimensions are ready
             function captureFrame() {
-                // Wait for video to be fully ready before capture
                 setTimeout(() => {
                     const canvas = document.createElement('canvas');
                     canvas.width = video.videoWidth;
                     canvas.height = video.videoHeight;
-        
+    
                     if (canvas.width === 0 || canvas.height === 0) {
                         console.error("Video feed not ready.");
                         alert("Error: Video feed not ready.");
                         return;
                     }
-        
+    
                     const context = canvas.getContext('2d');
                     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        
+    
                     // Save the captured frame to sessionStorage
                     const imageDataURL = canvas.toDataURL('image/png');
                     sessionStorage.setItem('capturedFrame', imageDataURL);
-                    console.log("Captured frame saved to sessionStorage.");  // Debug message
-        
+                    console.log("Captured frame saved to sessionStorage.");
+    
                     // Navigate to the display page
                     window.location.href = 'page2.html';
                 }, 500); // Adjust delay as needed
             }
-        
         </script>
         
 
