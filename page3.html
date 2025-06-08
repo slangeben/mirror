@@ -25,9 +25,11 @@
       width: 50%;
       height: auto;
       align-items: center;
+      z-index: 10;
+      position: relative;
     }
 
-    .flashlight {
+    #flashlight {
       position: absolute;
       width: 250px;
       height: 250px;
@@ -36,47 +38,44 @@
       filter: blur(30px);
       pointer-events: none;
       box-shadow: 0 0 30px rgba(255, 255, 0, 0.6);
-      z-index: 9999;
+      z-index: 1;
+      transition: transform 0.05s linear;
     }
   </style>
 </head>
 <body>
 
   <img class="lightText" src="images/mirror/planets/light.png" alt="Light Text" />
+  <div id="flashlight"></div>
 
   <script>
+    const flashlight = document.getElementById('flashlight');
     const lightText = document.querySelector('.lightText');
 
-    function createFlashlight(x, y) {
-      const flashlight = document.createElement('div');
-      flashlight.classList.add('flashlight');
-      flashlight.style.left = `${x - 125}px`;
-      flashlight.style.top = `${y - 125}px`;
-      document.body.appendChild(flashlight);
-
-      setTimeout(() => flashlight.remove(), 500);
+    function moveFlashlight(x, y) {
+      flashlight.style.transform = `translate(${x - 125}px, ${y - 125}px)`;
     }
 
-    // Desktop: mouse movement
+    // desktop
     document.addEventListener('mousemove', (e) => {
-      createFlashlight(e.pageX, e.pageY);
+      moveFlashlight(e.pageX, e.pageY);
     });
 
-    // Touch devices: touch movement
+    // touch
     document.addEventListener('touchmove', (e) => {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
-        createFlashlight(touch.pageX, touch.pageY);
+        moveFlashlight(touch.pageX, touch.pageY);
       }
-    });
+    }, { passive: true });
 
-    // Navigation on click/tap on the image only
+   
     lightText.addEventListener('click', () => {
       window.location.href = 'page4.html';
     });
 
     lightText.addEventListener('touchend', (e) => {
-      e.preventDefault(); // prevents accidental zoom
+      e.preventDefault(); 
       window.location.href = 'page4.html';
     });
   </script>
